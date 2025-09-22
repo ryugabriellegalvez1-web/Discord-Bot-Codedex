@@ -1,6 +1,9 @@
 import discord
 import requests
 import json
+import random
+
+positivity = ["Everyone has moments of light and darkness, not falling down in such moments is where greatness of character lies.", "Life's value is in surviving, more so in days you were proud to exist.", "Everyone has different paces in going through life as it isn't linear. Take your time."]
 
 def get_meme():
   response = requests.get('https://meme-api.com/gimme')
@@ -13,7 +16,10 @@ class MyClient(discord.Client):
      return
 
     if message.content.startswith('$RyuNarohudou'):
-     await message.channel.send('Good day! How may I help you?')
+     await message.channel.send('Good day! How may I help you\n \n 1. $Positivity - Inspirational messages \n 2. $meme - Uplifiting memes')
+    if message.content.startswith("$Positivity"):
+      num = random.randint(0,2)
+      await message.channel.send(positivity[num])
     if message.content.startswith('$meme'):
       await message.channel.send(get_meme())
 
@@ -25,4 +31,5 @@ intents = discord.Intents.default()
 intents.message_content = True
 
 client = MyClient(intents=intents)
-client.run("MTQxNzQ0NzE0NDMxNDYzODM1Ng.GQfY7M.xi0SDwjIkfr1NEAewbwA2kiCFnHwrTIIcYi8Y8")
+client.run("Your Token") #Unspecified for Security Reasons
+
